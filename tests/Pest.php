@@ -1,5 +1,7 @@
 <?php
 
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -14,6 +16,16 @@
 pest()->extend(Tests\TestCase::class)
  // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
+
+pest()->extend(Tests\TestCase::class)->in('Unit');
+
+uses()->afterEach(function () {
+    if ($container = \Mockery::getContainer()) {
+        $this->addToAssertionCount($container->mockery_getExpectationCount());
+    }
+
+    \Mockery::close();
+})->in('Unit', 'Feature');
 
 /*
 |--------------------------------------------------------------------------

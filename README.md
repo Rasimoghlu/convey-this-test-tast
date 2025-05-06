@@ -59,3 +59,132 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# SampleName Laravel Application
+
+This is a simple Laravel application that demonstrates user authentication, domain management, plans, and user administration.
+
+## Features
+
+- User Registration and Authentication
+- Domain Management (Add, Edit, Delete)
+- Plan Subscription
+- Admin User Management
+
+## Requirements
+
+- PHP 8.1 or higher
+- Composer
+- SQLite or MySQL
+
+## Installation
+
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
+
+2. Install dependencies:
+   ```
+   composer install
+   ```
+
+3. Set up environment:
+   ```
+   cp .env.example .env
+   ```
+
+4. Configure your database in the `.env` file:
+   ```
+   # For SQLite
+   DB_CONNECTION=sqlite
+   DB_DATABASE=database/database.sqlite
+   
+   # Or for MySQL
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=samplename
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+5. If using SQLite, create the database file:
+   ```
+   touch database/database.sqlite
+   ```
+
+6. Generate application key:
+   ```
+   php artisan key:generate
+   ```
+
+7. Run migrations and seeders:
+   ```
+   php artisan migrate --seed
+   ```
+
+8. Start the development server:
+   ```
+   php artisan serve
+   ```
+
+9. Access the application:
+   ```
+   http://localhost:8000
+   ```
+
+## Default Users
+
+After running the seeders, the following users will be available:
+
+- Admin: admin@example.com / password
+- Regular users: user1@example.com through user25@example.com / password
+
+## Testing
+
+The application includes a suite of unit tests built with Pest PHP framework. The tests use mocking to isolate components and eliminate database dependencies.
+
+### Running Tests
+
+You can run the tests using the custom Artisan command:
+
+```bash
+php artisan test:unit
+```
+
+Or run directly with Pest:
+
+```bash
+./vendor/bin/pest
+```
+
+To run specific test files:
+
+```bash
+./vendor/bin/pest --filter BasicUserTest
+```
+
+### Test Structure
+
+The unit tests are organized as follows:
+
+- **User Tests**: Tests for the User model and isAdmin functionality
+- **Auth Service Tests**: Tests for gate definitions and admin access permissions
+- **Domain Policy Tests**: Tests for authorization policies on domain operations
+- **Domain Service Tests**: Tests for domain management service operations
+
+### Testing Approach
+
+The tests use Mockery to mock dependencies and isolate the components being tested:
+
+- Models are mocked to avoid database interactions
+- Facades like Auth are mocked to control their behavior
+- Repositories are mocked to provide predictable data
+
+This approach ensures the tests are fast, reliable, and don't depend on the state of the database.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

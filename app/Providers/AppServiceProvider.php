@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Vite;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Disable Vite manifest check during development
+        Vite::useCspNonce();
+        Vite::useManifestFilename(null);
+        
+        // Use Bootstrap for pagination
+        Paginator::useBootstrap();
     }
 }
