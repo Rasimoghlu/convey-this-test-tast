@@ -22,7 +22,11 @@ Route::get('/', function () {
 });
 
 // Auth routes
-Auth::routes();
+Auth::routes([
+    'reset' => false,
+    'verify' => false,
+    'confirm' => false,
+]);
 
 // Dashboard (domain management)
 Route::middleware(['auth'])->group(function () {
@@ -41,6 +45,10 @@ Route::middleware(['auth', 'can:view-admin-pages'])->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users');
 });
 
-Auth::routes();
+Auth::routes([
+    'reset' => false,
+    'verify' => false,
+    'confirm' => false,
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
